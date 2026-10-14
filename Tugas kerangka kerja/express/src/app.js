@@ -4,6 +4,7 @@ import { layout, escapeHtml, halaman404 } from './layout.js';
 import { kategoriBerita } from './data.js';
 import dosenRouter from './routes/dosen.js';
 import adminRouter from './routes/admin.js';
+import apiRouter from './routes/api.js';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -75,6 +76,7 @@ app.get('/berita{/:kategori}', (req, res) => {
 // ---------- 3. Router modular dengan prefix ----------
 app.use('/dosen', dosenRouter);   // /dosen dan /dosen/:nidn
 app.use('/admin', adminRouter);   // grup prefix admin: /admin/dashboard, /admin/pengaturan
+app.use('/api', apiRouter);       // response JSON: /api/dosen
 
 // ---------- 4. 404: middleware terakhir, dijalankan jika tidak ada route yang cocok ----------
 app.use((req, res) => {
