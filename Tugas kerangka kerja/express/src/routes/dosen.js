@@ -4,8 +4,7 @@ import { layout, escapeHtml } from '../layout.js';
 
 const router = Router();
 
-// Panjang NIDN yang dianggap valid. Sesuaikan dengan data di data.js
-// (data kamu 10 digit; jika soal mewajibkan 10 digit, ubah jadi 10 dan isi data 10 digit)
+// Panjang NIDN yang dianggap valid: 10 digit
 const PANJANG_NIDN = 10;
 const POLA_NIDN = new RegExp(`^\\d{${PANJANG_NIDN}}$`);
 
