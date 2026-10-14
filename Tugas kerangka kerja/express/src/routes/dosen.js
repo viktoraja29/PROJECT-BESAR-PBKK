@@ -4,9 +4,17 @@ import { layout, escapeHtml } from '../layout.js';
 
 const router = Router();
 
+// Panjang NIDN yang dianggap valid. Sesuaikan dengan data di data.js
+// (data kamu 7 digit; jika soal mewajibkan 10 digit, ubah jadi 10 dan isi data 10 digit)
+const PANJANG_NIDN = 7;
+const POLA_NIDN = new RegExp(`^\\d{${PANJANG_NIDN}}$`);
+
+// Nilai kosong atau "-" ditampilkan sebagai tanda "-"
+const tampil = (v) => (!v || String(v).trim() === '-' ? '-' : escapeHtml(v));
+
 // GET /dosen  -> daftar dosen
 router.get('/', (req, res) => {
-  // Setiap kartu dosen bisa diklik -> /dosen/:nidn (profil + kontak)
+  // Setiap kartu dosen bisa diklik -> /dosen/:nidn (profil + informasi)
   const kartu = dosen
     .map((d) => `
       <a class="card dosen-card" href="/dosen/${d.nidn}">
@@ -24,15 +32,20 @@ router.get('/', (req, res) => {
     </main>`));
 });
 
-// GET /dosen/:nidn  -> NIDN 10 digit, selain itu 404
+// GET /dosen/:nidn  -> NIDN sesuai PANJANG_NIDN digit, selain itu 404
 router.get('/:nidn', (req, res, next) => {
   const { nidn } = req.params;
-  if (!/^\d{10}$/.test(nidn)) return next();
+  if (!POLA_NIDN.test(nidn)) return next();
 
   const d = dosen.find((x) => x.nidn === nidn);
   if (!d) return next();
 
-  const pesanWa = encodeURIComponent(`Assalamualaikum ${d.nama}, saya ingin bertanya...`);
+  // Semua informasi ditampilkan sebagai teks biasa (tanpa link)
+  const baris = (label, isi) => `
+            <li>
+              <span class="k-label">${label}</span>
+              <span>${isi}</span>
+            </li>`;
 
   res.send(layout(d.nama, `
     <main class="wrap">
@@ -46,34 +59,9 @@ router.get('/:nidn', (req, res, next) => {
         </div>
 
         <div class="profil-main card">
-          <h3>Kontak</h3>
-          <ul class="kontak">
-            <li>
-              <span class="k-label">WhatsApp</span>
-              <a href="https://wa.me/${d.wa}?text=${pesanWa}" target="_blank" rel="noopener">+${d.wa}</a>
-            </li>
-            <li>
-              <span class="k-label">Email</span>
-              <a href="mailto:${escapeHtml(d.email)}">${escapeHtml(d.email)}</a>
-            </li>
+          <h3>Informasi</h3>
+          <ul class="kontak">${baris('Email', tampil(d.email))}${baris('WhatsApp', tampil(d.wa))}${baris('Instagram', tampil(d.instagram))}${baris('LinkedIn', tampil(d.linkedin))}${baris('Alamat', tampil(d.alamat))}
           </ul>
-
-          <h3>Media sosial</h3>
-          <ul class="kontak">
-            <li>
-              <span class="k-label">Instagram</span>
-              <a href="https://instagram.com/${encodeURIComponent(d.instagram)}" target="_blank" rel="noopener">@${escapeHtml(d.instagram)}</a>
-            </li>
-            <li>
-              <span class="k-label">LinkedIn</span>
-              <a href="https://www.linkedin.com/in/${encodeURIComponent(d.linkedin)}" target="_blank" rel="noopener">${escapeHtml(d.linkedin)}</a>
-            </li>
-          </ul>
-
-          <h3>Alamat</h3>
-          <p>${escapeHtml(d.alamat)}</p>
-
-          <p><a class="btn" href="https://wa.me/${d.wa}?text=${pesanWa}" target="_blank" rel="noopener">Chat via WhatsApp</a></p>
         </div>
       </div>
     </main>`));
