@@ -1,6 +1,6 @@
 export const dosen = [
   {
-    nidn: 'TI-2443028',
+    nidn: '0002443028',
     nama: 'Julivian Dodi',
     email: '2443028@wicida.ac.id',
     wa: '08**********',
@@ -9,7 +9,7 @@ export const dosen = [
     alamat: 'Samarinda',
   },
   {
-    nidn: 'TI-2443085',
+    nidn: '0002443085',
     nama: 'Viktor',
     email: '2443085@wicida.ac.id',
     wa: '08**********',
@@ -18,7 +18,7 @@ export const dosen = [
     alamat: 'Samarinda',
   },
   {
-    nidn: 'TI-2443027',
+    nidn: '0002443027',
     nama: 'Muhammad Farhan',
     email: '2443027@Wicida.ac.id',
     wa: '08**********',
@@ -27,7 +27,7 @@ export const dosen = [
     alamat: 'Tenggarong',
   },
   {
-    nidn: 'TI-02443014',
+    nidn: '0002443014',
     nama: 'Shanjay Wijaya Indra Kirana',
     email: '2443014@wicida.ac.id',
     wa: '08**********',
@@ -36,7 +36,7 @@ export const dosen = [
     alamat: 'Samarinda',
   },
   {
-    nidn: 'TI-2443039',
+    nidn: '0002443039',
     nama: 'Muhammad Syahreza',
     email: '2443039@wicida.ac.id',
     wa: '08**********',
