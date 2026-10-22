@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { dosen, daftarKeahlian, inisial } from '../data.js'; // DIUBAH: + daftarKeahlian
+import { dosen, daftarKeahlian, inisial } from '../data.js';
 import { layout, escapeHtml } from '../layout.js';
 
 const router = Router();
@@ -13,19 +13,19 @@ const tampil = (v) => (!v || String(v).trim() === '-' ? '-' : escapeHtml(v));
 
 // GET /dosen  atau  /dosen?keahlian=Web  -> daftar dosen + filter
 router.get('/', (req, res) => {
-  // DITAMBAHKAN: baca query string ?keahlian=... lalu saring datanya
+
   const keahlian = (req.query.keahlian ?? '').trim();
   const data = keahlian
     ? dosen.filter((d) => d.keahlian.toLowerCase() === keahlian.toLowerCase())
     : dosen;
 
-  // DITAMBAHKAN: pilihan dropdown, yang sedang dipilih diberi "selected"
+
   const opsi = daftarKeahlian
     .map((k) => `<option value="${escapeHtml(k)}"${k === keahlian ? ' selected' : ''}>${escapeHtml(k)}</option>`)
     .join('');
 
   // Setiap kartu dosen bisa diklik -> /dosen/:nidn (profil + informasi)
-  const kartu = data // DIUBAH: dosen -> data (hasil filter)
+  const kartu = data
     .map((d) => `
       <a class="card dosen-card" href="/dosen/${d.nidn}">
         <span class="avatar">${inisial(d.nama)}</span>
@@ -50,7 +50,6 @@ router.get('/', (req, res) => {
     </main>`));
 });
 
-// GET /dosen/:nidn  -> NIDN sesuai PANJANG_NIDN digit, selain itu 404
 router.get('/:nidn', (req, res, next) => {
   const { nidn } = req.params;
   if (!POLA_NIDN.test(nidn)) return next();
@@ -58,7 +57,7 @@ router.get('/:nidn', (req, res, next) => {
   const d = dosen.find((x) => x.nidn === nidn);
   if (!d) return next();
 
-  // Semua informasi ditampilkan sebagai teks biasa (tanpa link)
+ 
   const baris = (label, isi) => `
             <li>
               <span class="k-label">${label}</span>
