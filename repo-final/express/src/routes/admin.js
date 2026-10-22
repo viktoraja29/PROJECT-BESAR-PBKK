@@ -1,8 +1,6 @@
 import { Router } from 'express';
 import { layout } from '../layout.js';
 
-// Grup route dengan prefix /admin
-// (di app.js dipasang dengan app.use('/admin', router))
 const router = Router();
 
 router.get('/dashboard', (req, res) => {
