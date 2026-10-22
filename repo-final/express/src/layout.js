@@ -1,5 +1,3 @@
-// Helper sederhana untuk membungkus konten dengan layout HTML.
-
 export function escapeHtml(str = '') {
   return String(str)
     .replaceAll('&', '&amp;')
@@ -43,7 +41,6 @@ export function layout(title, content, { hero = false } = {}) {
 </html>`;
 }
 
-// Halaman 404 kustom (dipakai oleh handler 404 terakhir di app.js)
 export function halaman404(url) {
   return layout('Halaman tidak ditemukan', `
     <main class="wrap">
