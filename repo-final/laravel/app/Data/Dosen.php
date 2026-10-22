@@ -11,7 +11,7 @@ class Dosen
             [
                 'nidn' => '0002443028',
                 'nama' => 'Julivian Dodi',
-                'keahlian' => 'Web', // DITAMBAHKAN
+                'keahlian' => 'Web', 
                 'email' => '2443028@wicida.ac.id',
                 'wa' => '08**********',
                 'instagram' => 'Julipian',
@@ -21,7 +21,7 @@ class Dosen
             [
                 'nidn' => '0002443085',
                 'nama' => 'Viktor',
-                'keahlian' => 'Jaringan', // DITAMBAHKAN
+                'keahlian' => 'Jaringan', 
                 'email' => '2443085@wicida.ac.id',
                 'wa' => '08**********',
                 'instagram' => 'Rotkiv Aja',
@@ -31,7 +31,7 @@ class Dosen
             [
                 'nidn' => '0002443027',
                 'nama' => 'Muhammad Farhan',
-                'keahlian' => 'Web', // DITAMBAHKAN
+                'keahlian' => 'Web', 
                 'email' => '2443027@wicida.ac.id',
                 'wa' => '08**********',
                 'instagram' => 'Farhan Buas',
@@ -41,7 +41,7 @@ class Dosen
             [
                 'nidn' => '0002443014',
                 'nama' => 'Shanjay Wijaya Indra Kirana',
-                'keahlian' => 'Basis Data', // DITAMBAHKAN
+                'keahlian' => 'Basis Data', 
                 'email' => '2443014@wicida.ac.id',
                 'wa' => '08**********',
                 'instagram' => 'Shanjay Hayyukz',
@@ -51,7 +51,7 @@ class Dosen
             [
                 'nidn' => '0002443039',
                 'nama' => 'Muhammad Syahreza',
-                'keahlian' => 'Basis Data', // DITAMBAHKAN
+                'keahlian' => 'Basis Data', 
                 'email' => '2443039@wicida.ac.id',
                 'wa' => '08**********',
                 'instagram' => 'Reza Anos',
@@ -61,7 +61,6 @@ class Dosen
         ];
     }
 
-    // DITAMBAHKAN: daftar keahlian unik untuk isi dropdown filter
     public static function daftarKeahlian(): array
     {
         return array_values(array_unique(array_column(self::all(), 'keahlian')));
