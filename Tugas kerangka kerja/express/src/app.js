@@ -18,7 +18,7 @@ app.use((req, res, next) => {
   next();
 });
 
-// ---------- 1. Route statis: "/" dan "/profil" ----------
+//  1. Route statis: "/" dan "/profil" 
 app.get('/', (req, res) => {
   res.send(layout('Beranda', `
     <section class="hero">
@@ -58,8 +58,8 @@ app.get('/profil', (req, res) => {
     </main>`));
 });
 
-// ---------- 2. Parameter opsional (sintaks Express 5): /berita atau /berita/akademik ----------
-// Jika kategori kosong, nilai default-nya "terbaru"
+//  2. Parameter opsional (sintaks Express 5): /berita atau /berita/akademik 
+// Jika kategori kosong, nilai default-nya 
 app.get('/berita{/:kategori}', (req, res) => {
   const kategori = req.params.kategori ?? 'terbaru';
   const tab = kategoriBerita
@@ -73,12 +73,12 @@ app.get('/berita{/:kategori}', (req, res) => {
     </main>`));
 });
 
-// ---------- 3. Router modular dengan prefix ----------
+//  3. Router modular dengan prefix 
 app.use('/dosen', dosenRouter);   // /dosen dan /dosen/:nidn
 app.use('/admin', adminRouter);   // grup prefix admin: /admin/dashboard, /admin/pengaturan
 app.use('/api', apiRouter);       // response JSON: /api/dosen
 
-// ---------- 4. 404: middleware terakhir, dijalankan jika tidak ada route yang cocok ----------
+//  4. 404: middleware terakhir, dijalankan jika tidak ada route yang cocok 
 app.use((req, res) => {
   res.status(404).send(halaman404(req.originalUrl));
 });
