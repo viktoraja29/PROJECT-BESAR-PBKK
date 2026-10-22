@@ -29,14 +29,3 @@ php artisan key:generate
 php artisan serve
 ```
 Buka http://127.0.0.1:8000. Daftar route: `php artisan route:list`
-
-## Daftar route
-| Route | Keterangan |
-|---|---|
-| `/`, `/profil` | Beranda, visi dan misi |
-| `/dosen?keahlian=...` | Daftar dosen + filter keahlian |
-| `/dosen/{nidn}` | Profil dosen, NIDN 10 digit, selain itu 404 |
-| `/berita/{kategori?}` | Berita, default "terbaru" |
-| `/admin/dashboard`, `/admin/pengaturan` | Grup dengan prefix admin |
-| `/api/dosen` | Response JSON |
-| URL lain | Halaman 404 kustom |
